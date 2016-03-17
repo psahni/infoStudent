@@ -1,0 +1,54 @@
+<div ng-class="{'list-row clearfix': true, 'highlight': isFail() && detail.editstate!=1}">
+  <div ng-form="student_detail_form_{{elementIndex}}" class='form'>
+     <div class='sd-name col-sm-5'>
+      <div ng-if="!detail.editstate">{{detail.name}}</div>
+      <input type='text'   
+            autocomplete="off"                 
+            field-name='name' 
+            element-index="{{elementIndex}}"
+            ng-model='detail.name' 
+            ng-model-options="{ updateOn: 'blur' }"
+            ng-if='detail.editstate'
+            name="name"
+            class='form-control'  
+            ensure-unique
+            inline-editable            
+            load-details="loadDetails()"
+            required
+            pattern="[A-Za-z\s]+"/>	
+        <div class='error ng-hide' ng-show='student_detail_form_{{elementIndex}}.name.$dirty && student_detail_form_{{elementIndex}}.name.$invalid'>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.name.$error.required'>Name is required field.</span>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.name.$error.pattern'>Only Characters are allowed.</span>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.name.$error.unique'>Name already taken</span>
+       </div>
+     </div>
+     <div class='sd-grade col-sm-5'>
+       <div ng-if="!detail.editstate">{{detail.grade}}</div>
+       <input type='number'
+          autocomplete="off"
+          field-name='grade'                                 
+          element-index="{{elementIndex}}"
+          ng-model='detail.grade' 
+          ng-model-options="{ updateOn: 'blur' }"
+          ng-if='detail.editstate' 
+          inline-editable
+          name="grade"
+          min='0' max='100'
+          class='form-control'          
+          load-details="loadDetails()"
+          required 
+          pattern="^[0-9]+$" />       
+       <div class='error ng-hide' ng-show='student_detail_form_{{elementIndex}}.grade.$dirty && student_detail_form_{{elementIndex}}.grade.$invalid'>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.grade.$error.required'>Grade is required field.</span>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.grade.$error.min'>Grade can't be negative</span>
+          <span class='error' ng-show='student_detail_form_{{elementIndex}}.grade.$error.max'>Grade can't be more than 100</span>          
+        </div>
+     </div>
+    <div class='col-sm-1' ng-hide="detail.editstate">
+      <a ng-click="setEditable()" class='controls'>Edit</a>
+    </div>          
+    <div class='col-sm-1'>
+      <a ng-click="destroyDetail()" class='controls'>Delete</a>
+    </div>
+  </div>
+</div>

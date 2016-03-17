@@ -1,0 +1,32 @@
+<h3 class='col-sm-8'>Manage Student Details</h3>
+<a ng-href='#student_details/new' class='btn btn-primary btn-sm pull-right'><strong>Enter Student Details</strong></a>
+<div class='col-sm-12 listing' ng-show='student_details.length > 0'>
+  <div class='list-row'>     
+     <div class='col-sm-2'>
+          <strong>Min Grade:</strong> {{ min_grade }}
+     </div>
+     <div class='col-sm-2'>
+          <strong>Max Grade:</strong> {{ max_grade }}
+     </div>
+     <div class='col-sm-2'>
+           <strong>Avg. Grade:</strong> {{ avg_grade }}
+     </div>	   
+  </div>
+
+  <div class='list-row'>
+    <div class='col-sm-5'>
+       <strong>Name</strong>
+    </div>
+    <div class='col-sm-5'>
+       <strong>Grade</strong>
+    </div>
+  </div>
+  <div ng-repeat='detail in student_details'>
+    <student-detail detail='detail' element-index='{{$index}}' load-details="loadDetails()">      
+    </student-detail>
+  </div>
+</div><!-- end listing -->
+
+<div ng-show='student_details.length == 0' class='col-sm-12 alert alert-danger pull-left'>
+    <h5>No List Found</h5>
+</div>
